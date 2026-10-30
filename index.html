@@ -2,8 +2,11 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prana & Nada Pro — Vedic Sadhana & Nada Yoga Sanctuary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#070510">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Prana & Nada Pro — Mobile & Desktop Spiritual Sanctuary</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -13,29 +16,32 @@
     :root[data-theme="dark"] {
       --bg-primary: #070510;
       --bg-secondary: #110e20;
-      --bg-glass: rgba(17, 14, 32, 0.78);
+      --bg-glass: rgba(17, 14, 32, 0.84);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --border-color: rgba(245, 158, 11, 0.22);
       --accent-gold: #f59e0b;
-      --accent-secondary: #a855f7;
-      --input-bg: rgba(15, 23, 42, 0.9);
-      --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+      --input-bg: rgba(15, 23, 42, 0.92);
+      --card-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
       --bead-inactive: #334155;
     }
 
     :root[data-theme="light"] {
       --bg-primary: #fcfaf5;
       --bg-secondary: #f4efe4;
-      --bg-glass: rgba(255, 253, 248, 0.88);
+      --bg-glass: rgba(255, 253, 248, 0.92);
       --text-main: #1e1b18;
       --text-muted: #645a4f;
       --border-color: rgba(180, 83, 9, 0.25);
       --accent-gold: #d97706;
-      --accent-secondary: #7e22ce;
       --input-bg: #ffffff;
-      --card-shadow: 0 15px 35px rgba(180, 130, 70, 0.12);
+      --card-shadow: 0 12px 32px rgba(180, 130, 70, 0.12);
       --bead-inactive: #d6d3d1;
+    }
+
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
     }
 
     body {
@@ -44,7 +50,14 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
       scroll-behavior: smooth;
-      transition: background-color 0.35s ease, color 0.35s ease;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        padding-bottom: 0;
+      }
     }
 
     h1, h2, h3, .serif-title {
@@ -54,9 +67,10 @@
     .glass-card {
       background: var(--bg-glass);
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--border-color);
       box-shadow: var(--card-shadow);
-      transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
 
     .themed-input {
@@ -69,13 +83,28 @@
       color: var(--text-muted);
     }
 
-    /* Active State Buttons */
+    /* Hide Scrollbars for Mobile Horizontal Swipe Containers */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Active Button Gradient */
     .btn-active {
       background: linear-gradient(135deg, #f59e0b, #ea580c) !important;
       color: #ffffff !important;
       font-weight: 700 !important;
       border-color: transparent !important;
-      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+    }
+
+    /* Bottom Mobile Nav Active Tab */
+    .mob-nav-active {
+      color: #f59e0b !important;
+      font-weight: 700;
     }
 
     /* Ambient Mandala Rotation */
@@ -84,24 +113,35 @@
       to { transform: rotate(360deg); }
     }
     .mandala-spin {
-      animation: spin-slow 75s linear infinite;
+      animation: spin-slow 80s linear infinite;
     }
 
-    /* Breathing Lotus Visualizer */
+    /* Responsive Breathing Lotus Visualizer (Clamped for Mobile Screens) */
     .lotus-circle {
-      transition: transform 4s ease-in-out, box-shadow 4s ease-in-out, border-color 0.5s ease;
+      transition: transform 4s ease-in-out, box-shadow 4s ease-in-out, border-color 0.4s ease;
+      will-change: transform;
     }
     .breathe-in {
-      transform: scale(1.42);
-      box-shadow: 0 0 65px rgba(245, 158, 11, 0.55), inset 0 0 30px rgba(245, 158, 11, 0.35);
+      transform: scale(1.28);
+      box-shadow: 0 0 55px rgba(245, 158, 11, 0.55), inset 0 0 25px rgba(245, 158, 11, 0.35);
+    }
+    @media (min-width: 768px) {
+      .breathe-in {
+        transform: scale(1.42);
+      }
     }
     .breathe-hold {
-      transform: scale(1.42);
-      box-shadow: 0 0 90px rgba(168, 85, 247, 0.7), inset 0 0 40px rgba(168, 85, 247, 0.45);
+      transform: scale(1.28);
+      box-shadow: 0 0 80px rgba(168, 85, 247, 0.7), inset 0 0 35px rgba(168, 85, 247, 0.45);
+    }
+    @media (min-width: 768px) {
+      .breathe-hold {
+        transform: scale(1.42);
+      }
     }
     .breathe-out {
       transform: scale(1);
-      box-shadow: 0 0 20px rgba(245, 158, 11, 0.2), inset 0 0 10px rgba(245, 158, 11, 0.1);
+      box-shadow: 0 0 18px rgba(245, 158, 11, 0.2), inset 0 0 10px rgba(245, 158, 11, 0.1);
     }
 
     /* Candle Flame Keyframes */
@@ -122,28 +162,42 @@
     /* Bead Pop Animation */
     @keyframes beadPop {
       0% { transform: scale(1); }
-      50% { transform: scale(1.22); }
+      50% { transform: scale(1.18); }
       100% { transform: scale(1); }
     }
     .bead-pulse {
-      animation: beadPop 0.22s ease-out;
+      animation: beadPop 0.2s ease-out;
     }
 
     /* Chakra Pulse */
     @keyframes chakraPulse {
-      0%, 100% { transform: scale(1); opacity: 0.85; }
-      50% { transform: scale(1.14); opacity: 1; }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
     }
     .chakra-active-node {
       animation: chakraPulse 2s infinite ease-in-out;
+      border-color: #f59e0b !important;
+    }
+
+    /* Pseudo-Fullscreen Fallback for iOS Safari Trataka */
+    .ios-fullscreen {
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 9999 !important;
+      width: 100vw !important;
+      height: 100dvh !important;
+      border-radius: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
     }
   </style>
 </head>
 <body class="selection:bg-amber-500 selection:text-white">
 
-  <!-- Background Sacred Sri Yantra Geometry -->
+  <!-- Responsive Background Sacred Geometry -->
   <div class="fixed inset-0 pointer-events-none flex items-center justify-center opacity-10 z-0 overflow-hidden">
-    <svg class="w-[820px] h-[820px] mandala-spin" viewBox="0 0 200 200" fill="none">
+    <svg class="w-[92vw] h-[92vw] max-w-[820px] max-h-[820px] mandala-spin" viewBox="0 0 200 200" fill="none">
       <circle cx="100" cy="100" r="95" stroke="#d97706" stroke-width="0.5" stroke-dasharray="2 2"/>
       <circle cx="100" cy="100" r="75" stroke="#d97706" stroke-width="0.5"/>
       <polygon points="100,15 173,142 27,142" stroke="#d97706" stroke-width="0.6"/>
@@ -156,87 +210,123 @@
     </svg>
   </div>
 
-  <!-- Sticky Navigation Header -->
-  <header class="sticky top-0 z-50 glass-card border-b px-4 md:px-8 py-3.5">
-    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
-      <div class="flex items-center gap-3">
-        <svg class="w-9 h-9 text-amber-500" viewBox="0 0 64 64" fill="none">
+  <!-- Sticky Top Navigation Bar (Compact on Mobile, Full on Desktop) -->
+  <header class="sticky top-0 z-40 glass-card border-b px-3.5 sm:px-6 lg:px-8 py-2.5 sm:py-3.5">
+    <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
+      <!-- Brand Logo & Lunar Tithi -->
+      <a href="#dashboard" class="flex items-center gap-2.5 min-w-0">
+        <svg class="w-8 h-8 sm:w-9 sm:h-9 text-amber-500 shrink-0" viewBox="0 0 64 64" fill="none">
           <path d="M32 8C26 20 16 26 16 36C16 44.8 23.2 52 32 52C40.8 52 48 44.8 48 36C48 26 38 20 32 8Z" stroke="currentColor" stroke-width="2.5"/>
           <path d="M32 16C28 24 22 29 22 36C22 41.5 26.5 46 32 46C37.5 46 42 41.5 42 36C42 29 36 24 32 16Z" fill="currentColor" fill-opacity="0.25"/>
           <circle cx="32" cy="35" r="4" fill="currentColor"/>
         </svg>
-        <div>
-          <span class="serif-title text-lg md:text-xl font-bold tracking-wider bg-gradient-to-r from-amber-500 via-orange-500 to-purple-500 bg-clip-text text-transparent block">
-            Prana & Nada Pro
+        <div class="truncate">
+          <span class="serif-title text-base sm:text-xl font-bold tracking-wider bg-gradient-to-r from-amber-500 via-orange-500 to-purple-500 bg-clip-text text-transparent block truncate">
+            Prana & Nada
           </span>
-          <span id="tithi-badge" class="text-[10px] themed-muted uppercase tracking-widest block">Loading Lunar Tithi...</span>
+          <span id="tithi-badge" class="text-[10px] themed-muted uppercase tracking-widest block truncate">Loading Tithi...</span>
         </div>
-      </div>
+      </a>
 
-      <nav class="flex flex-wrap items-center gap-1.5 md:gap-4 text-xs md:text-sm font-medium">
-        <a href="#dashboard" class="px-2.5 py-1.5 rounded-full hover:bg-amber-500/15 transition">📊 Tracker</a>
-        <a href="#meditation" class="px-2.5 py-1.5 rounded-full hover:bg-amber-500/15 transition">🧘 Meditation</a>
-        <a href="#trataka" class="px-2.5 py-1.5 rounded-full hover:bg-amber-500/15 transition">🕯️ Trataka</a>
-        <a href="#japa" class="px-2.5 py-1.5 rounded-full hover:bg-amber-500/15 transition">📿 Japa Mala</a>
-        <a href="#chakras" class="px-2.5 py-1.5 rounded-full hover:bg-amber-500/15 transition">🌈 7 Chakras</a>
-        <a href="#beej-mantras" class="px-2.5 py-1.5 rounded-full hover:bg-amber-500/15 transition">🕉️ Beej Mantras</a>
+      <!-- Desktop Navigation Links (Hidden on Mobile/Tablet, Replaced by Bottom Dock) -->
+      <nav class="hidden lg:flex items-center gap-1 xl:gap-2 text-xs xl:text-sm font-medium">
+        <a href="#dashboard" class="px-3 py-1.5 rounded-full hover:bg-amber-500/15 transition">📊 Tracker</a>
+        <a href="#meditation" class="px-3 py-1.5 rounded-full hover:bg-amber-500/15 transition">🧘 Meditation</a>
+        <a href="#trataka" class="px-3 py-1.5 rounded-full hover:bg-amber-500/15 transition">🕯️ Trataka</a>
+        <a href="#japa" class="px-3 py-1.5 rounded-full hover:bg-amber-500/15 transition">📿 Japa Mala</a>
+        <a href="#chakras" class="px-3 py-1.5 rounded-full hover:bg-amber-500/15 transition">🌈 7 Chakras</a>
+        <a href="#beej-mantras" class="px-3 py-1.5 rounded-full hover:bg-amber-500/15 transition">🕉️ Beej Mantras</a>
       </nav>
 
-      <!-- Theme Switcher Button (Surya White vs Chandra Dark) -->
-      <div class="flex items-center gap-2">
-        <button id="theme-toggle-btn" onclick="toggleTheme()" class="px-3.5 py-2 rounded-full border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-xs font-semibold flex items-center gap-2 transition">
+      <!-- Utility Controls: Wake Lock & Theme Switcher -->
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <button id="wakelock-btn" onclick="toggleWakeLock()" class="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full border border-amber-500/30 text-[11px] sm:text-xs font-medium flex items-center gap-1 hover:bg-amber-500/15 transition" title="Keep Screen Awake During Sadhana">
+          <span id="wakelock-icon">🔓</span>
+          <span class="hidden sm:inline" id="wakelock-text">Screen Awake: Off</span>
+        </button>
+
+        <button id="theme-toggle-btn" onclick="toggleTheme()" class="px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-full border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-[11px] sm:text-xs font-semibold flex items-center gap-1.5 transition">
           <span id="theme-icon">☀️</span>
-          <span id="theme-label">Surya (White Theme)</span>
+          <span id="theme-label" class="hidden sm:inline">Surya (White)</span>
         </button>
       </div>
     </div>
   </header>
 
-  <main class="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-10 space-y-24">
+  <!-- Mobile Bottom App Navigation Bar (Thumb-Friendly Dock for Phones/Tablets) -->
+  <nav class="lg:hidden fixed bottom-0 left-0 right-0 z-50 glass-card border-t border-amber-500/30 px-2 pt-1.5 pb-[calc(0.4rem+env(safe-area-inset-bottom))] flex justify-around items-center text-[10px] font-medium">
+    <a href="#dashboard" onclick="setMobNavActive(this)" class="mob-nav-item mob-nav-active flex flex-col items-center py-1 px-2 rounded-lg transition">
+      <span class="text-base">📊</span>
+      <span class="mt-0.5">Home</span>
+    </a>
+    <a href="#meditation" onclick="setMobNavActive(this)" class="mob-nav-item flex flex-col items-center py-1 px-2 rounded-lg transition">
+      <span class="text-base">🧘</span>
+      <span class="mt-0.5">Meditate</span>
+    </a>
+    <a href="#trataka" onclick="setMobNavActive(this)" class="mob-nav-item flex flex-col items-center py-1 px-2 rounded-lg transition">
+      <span class="text-base">🕯️</span>
+      <span class="mt-0.5">Trataka</span>
+    </a>
+    <a href="#japa" onclick="setMobNavActive(this)" class="mob-nav-item flex flex-col items-center py-1 px-2 rounded-lg transition">
+      <span class="text-base">📿</span>
+      <span class="mt-0.5">108 Japa</span>
+    </a>
+    <a href="#chakras" onclick="setMobNavActive(this)" class="mob-nav-item flex flex-col items-center py-1 px-2 rounded-lg transition">
+      <span class="text-base">🌈</span>
+      <span class="mt-0.5">Chakras</span>
+    </a>
+    <a href="#beej-mantras" onclick="setMobNavActive(this)" class="mob-nav-item flex flex-col items-center py-1 px-2 rounded-lg transition">
+      <span class="text-base">🕉️</span>
+      <span class="mt-0.5">Mantras</span>
+    </a>
+  </nav>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="relative z-10 max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-16 sm:space-y-24">
 
     <!-- ==========================================
-         SPIRITUAL INDUSTRY DASHBOARD & SANKALPA BAR
+         DASHBOARD & SANKALPA TRACKER
          ========================================== -->
-    <section id="dashboard" class="scroll-mt-24 space-y-6">
-      <div class="text-center max-w-3xl mx-auto space-y-4">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-500 text-xs font-semibold uppercase tracking-widest">
-          ✨ Complete Digital Ashram & Bio-Harmonic Suite
+    <section id="dashboard" class="scroll-mt-20 space-y-5 sm:space-y-6">
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-500 text-[11px] font-semibold uppercase tracking-widest">
+          ✨ Responsive Mobile & Desktop Ashram
         </div>
-        <h1 class="text-3xl md:text-5xl font-bold leading-tight">
-          Sacred <span class="text-amber-500">Sadhana</span> & Sound Healing Portal
+        <h1 class="text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+          Sacred <span class="text-amber-500">Sadhana</span> & Nada Yoga Sanctuary
         </h1>
-        <p class="themed-muted text-sm md:text-base">
-          All progress is automatically saved to your browser. Switch between <strong class="text-amber-500">Surya (Temple White)</strong> and <strong class="text-purple-400">Chandra (Midnight Dark)</strong> modes anytime.
+        <p class="themed-muted text-xs sm:text-sm md:text-base max-w-2xl mx-auto">
+          Practice Pranayama, Trataka gazing, 108 Japa with haptic feedback, 7-Chakra tuning, and 32 Vedic Beej Mantras across any screen size.
         </p>
       </div>
 
-      <!-- Daily Sadhana Analytics & Sankalpa Card -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div class="glass-card rounded-2xl p-5 flex items-center justify-between">
+      <!-- 2x2 Grid on Mobile, 4-Column Row on Desktop -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div class="glass-card rounded-2xl p-4 sm:p-5 flex items-center justify-between">
           <div>
-            <span class="text-xs uppercase tracking-wider themed-muted">Meditation Mins</span>
-            <div id="stat-med-mins" class="text-3xl font-bold text-amber-500 mt-1">0</div>
+            <span class="text-[10px] sm:text-xs uppercase tracking-wider themed-muted block">Meditation Mins</span>
+            <div id="stat-med-mins" class="text-2xl sm:text-3xl font-bold text-amber-500 mt-0.5">0</div>
           </div>
-          <span class="text-3xl">🧘</span>
+          <span class="text-2xl sm:text-3xl">🧘</span>
         </div>
-        <div class="glass-card rounded-2xl p-5 flex items-center justify-between">
+        <div class="glass-card rounded-2xl p-4 sm:p-5 flex items-center justify-between">
           <div>
-            <span class="text-xs uppercase tracking-wider themed-muted">Lifetime Japa Beads</span>
-            <div id="stat-total-beads" class="text-3xl font-bold text-purple-500 mt-1">0</div>
+            <span class="text-[10px] sm:text-xs uppercase tracking-wider themed-muted block">Lifetime Beads</span>
+            <div id="stat-total-beads" class="text-2xl sm:text-3xl font-bold text-purple-500 mt-0.5">0</div>
           </div>
-          <span class="text-3xl">📿</span>
+          <span class="text-2xl sm:text-3xl">📿</span>
         </div>
-        <div class="glass-card rounded-2xl p-5 flex items-center justify-between">
+        <div class="glass-card rounded-2xl p-4 sm:p-5 flex items-center justify-between">
           <div>
-            <span class="text-xs uppercase tracking-wider themed-muted">108 Malas Completed</span>
-            <div id="stat-total-malas" class="text-3xl font-bold text-emerald-500 mt-1">0</div>
+            <span class="text-[10px] sm:text-xs uppercase tracking-wider themed-muted block">108 Malas Done</span>
+            <div id="stat-total-malas" class="text-2xl sm:text-3xl font-bold text-emerald-500 mt-0.5">0</div>
           </div>
-          <span class="text-3xl">🌸</span>
+          <span class="text-2xl sm:text-3xl">🌸</span>
         </div>
-        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between">
-          <span class="text-xs uppercase tracking-wider themed-muted">Daily Sankalpa (Intention)</span>
-          <input id="sankalpa-input" type="text" oninput="saveSankalpa(this.value)" placeholder="e.g., May all beings be peaceful..."
-            class="mt-2 w-full bg-transparent border-b border-amber-500/40 text-xs py-1 focus:outline-none focus:border-amber-500">
+        <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between col-span-2 lg:col-span-1">
+          <span class="text-[10px] sm:text-xs uppercase tracking-wider themed-muted">Daily Sankalpa (Intention)</span>
+          <input id="sankalpa-input" type="text" oninput="saveSankalpa(this.value)" placeholder="Enter daily spiritual intention..."
+            class="mt-1.5 w-full bg-transparent border-b border-amber-500/40 text-xs sm:text-sm py-1 focus:outline-none focus:border-amber-500">
         </div>
       </div>
     </section>
@@ -244,73 +334,73 @@
     <!-- ==========================================
          SECTION 1: MEDITATION & PRANAYAMA STUDIO
          ========================================== -->
-    <section id="meditation" class="scroll-mt-24">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-amber-500/20 pb-4">
+    <section id="meditation" class="scroll-mt-20">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-5 sm:mb-8 border-b border-amber-500/20 pb-3 sm:pb-4">
         <div>
-          <span class="text-amber-500 text-xs uppercase tracking-widest font-semibold">Module 01 • Dhyana, Pranayama & Nada Yoga</span>
-          <h2 class="text-2xl md:text-4xl font-bold mt-1">Meditation & Binaural Studio</h2>
+          <span class="text-amber-500 text-[11px] uppercase tracking-widest font-semibold">Module 01 • Dhyana, Pranayama & Binaural Beats</span>
+          <h2 class="text-xl sm:text-3xl lg:text-4xl font-bold mt-1">Meditation & Breath Studio</h2>
         </div>
-        <p class="themed-muted text-sm max-w-md mt-2 md:mt-0">
-          Synchronize your breath with 4-phase Kumbhaka retention, Mudra prescriptions, and live Web-Audio Binaural Beats.
+        <p class="themed-muted text-xs sm:text-sm max-w-md mt-1.5 md:mt-0">
+          Synchronize your breath with 4-phase Kumbhaka retention, Mudra guidance, and multi-layered Web Audio soundscapes.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-        <!-- Left: Interactive Breathing Lotus Visualizer -->
-        <div class="lg:col-span-7 glass-card rounded-3xl p-8 flex flex-col items-center justify-between min-h-[480px] relative overflow-hidden">
-          <!-- Top Mudra Prescription Bar -->
-          <div class="w-full flex flex-wrap justify-between items-center gap-2 border-b border-amber-500/15 pb-3 text-xs">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 items-stretch">
+        <!-- Left: Responsive Breathing Lotus Visualizer -->
+        <div class="lg:col-span-7 glass-card rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-between min-h-[380px] sm:min-h-[470px] relative overflow-hidden">
+          <!-- Top Mudra Selector -->
+          <div class="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-amber-500/15 pb-3 text-xs">
             <div>
-              <span class="themed-muted">Recommended Mudra:</span>
+              <span class="themed-muted">Active Mudra:</span>
               <strong id="mudra-title" class="text-amber-500 ml-1">Gyan Mudra (Wisdom)</strong>
             </div>
-            <select id="mudra-select" onchange="updateMudraInfo(this.value)" class="themed-input rounded-lg px-2.5 py-1 text-xs">
+            <select id="mudra-select" onchange="updateMudraInfo(this.value)" class="w-full sm:w-auto themed-input rounded-lg px-3 py-2 sm:py-1.5 text-xs">
               <option value="gyan">👌 Gyan Mudra (Focus & Peace)</option>
               <option value="prana">✌️ Prana Mudra (Vitality & Immunity)</option>
-              <option value="apana">🤟 Apana Vayu Mudra (Heart & Calm)</option>
+              <option value="apana">🤟 Apana Vayu Mudra (Heart Calm)</option>
               <option value="dhyana">🤲 Dhyana Mudra (Deep Samadhi)</option>
             </select>
           </div>
 
-          <!-- Animated Breathing Circle -->
-          <div class="my-8 flex flex-col items-center justify-center">
-            <div id="breath-circle" class="lotus-circle w-48 h-48 rounded-full border-2 border-amber-500/60 flex flex-col items-center justify-center relative bg-gradient-to-b from-amber-500/15 to-purple-600/15">
-              <svg class="w-24 h-24 text-amber-500" viewBox="0 0 100 100" fill="none">
+          <!-- Clamped Lotus Circle (Never overflows 320px-375px mobile viewports) -->
+          <div class="my-6 sm:my-10 flex flex-col items-center justify-center">
+            <div id="breath-circle" class="lotus-circle w-36 h-36 sm:w-48 sm:h-48 rounded-full border-2 border-amber-500/60 flex flex-col items-center justify-center relative bg-gradient-to-b from-amber-500/15 to-purple-600/15">
+              <svg class="w-16 h-16 sm:w-24 sm:h-24 text-amber-500" viewBox="0 0 100 100" fill="none">
                 <path d="M50 15C40 35 25 45 25 62C25 75.8 36.2 87 50 87C63.8 87 75 75.8 75 62C75 45 60 35 50 15Z" stroke="currentColor" stroke-width="2.2"/>
                 <path d="M50 25C35 45 12 48 12 65C12 78 28 85 50 87" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 2"/>
                 <path d="M50 25C65 45 88 48 88 65C88 78 72 85 50 87" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 2"/>
                 <circle cx="50" cy="58" r="6" fill="currentColor"/>
               </svg>
-              <span id="breath-instruction" class="text-xs font-bold tracking-widest uppercase text-amber-500 mt-2">Ready</span>
+              <span id="breath-instruction" class="text-[11px] sm:text-xs font-bold tracking-widest uppercase text-amber-500 mt-1.5">Ready</span>
             </div>
           </div>
 
-          <!-- Timer & Mudra Instruction Footer -->
-          <div class="text-center w-full space-y-2">
-            <div id="meditation-timer-display" class="text-5xl font-bold font-mono tracking-wider">10:00</div>
-            <p id="breath-subtext" class="text-xs themed-muted uppercase tracking-widest">Choose duration & press Start</p>
-            <p id="mudra-desc" class="text-xs text-amber-500/90 italic pt-1">Touch tip of index finger to thumb; keep other 3 fingers straight.</p>
+          <!-- Timer & Mudra Footer -->
+          <div class="text-center w-full space-y-1.5">
+            <div id="meditation-timer-display" class="text-4xl sm:text-5xl font-bold font-mono tracking-wider">10:00</div>
+            <p id="breath-subtext" class="text-[11px] sm:text-xs themed-muted uppercase tracking-widest">Choose duration & press Start</p>
+            <p id="mudra-desc" class="text-[11px] sm:text-xs text-amber-500/90 italic pt-1">Touch tip of index finger to thumb; keep other 3 fingers straight.</p>
           </div>
         </div>
 
-        <!-- Right: Meditation Controls & Multi-Layer Audio Synthesizer -->
-        <div class="lg:col-span-5 glass-card rounded-3xl p-7 space-y-5 flex flex-col justify-between">
-          <!-- Duration Buttons (Fixed Active State) -->
+        <!-- Right: Touch-Friendly Controls & Synthesizer -->
+        <div class="lg:col-span-5 glass-card rounded-3xl p-5 sm:p-7 space-y-5 flex flex-col justify-between">
+          <!-- Duration Buttons -->
           <div>
             <label class="block text-xs uppercase tracking-wider text-amber-500 font-bold mb-2">1. Session Duration</label>
-            <div class="grid grid-cols-5 gap-2">
-              <button onclick="setMeditationTime(3, this)" class="med-time-btn py-2 rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition">3m</button>
-              <button onclick="setMeditationTime(5, this)" class="med-time-btn py-2 rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition">5m</button>
-              <button onclick="setMeditationTime(10, this)" class="med-time-btn btn-active py-2 rounded-xl border border-amber-500/30 text-xs font-medium transition">10m</button>
-              <button onclick="setMeditationTime(15, this)" class="med-time-btn py-2 rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition">15m</button>
-              <button onclick="setMeditationTime(30, this)" class="med-time-btn py-2 rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition">30m</button>
+            <div class="grid grid-cols-5 gap-1.5 sm:gap-2">
+              <button onclick="setMeditationTime(3, this)" class="med-time-btn min-h-[42px] rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition">3m</button>
+              <button onclick="setMeditationTime(5, this)" class="med-time-btn min-h-[42px] rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition">5m</button>
+              <button onclick="setMeditationTime(10, this)" class="med-time-btn btn-active min-h-[42px] rounded-xl border border-amber-500/30 text-xs font-medium transition">10m</button>
+              <button onclick="setMeditationTime(15, this)" class="med-time-btn min-h-[42px] rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition">15m</button>
+              <button onclick="setMeditationTime(30, this)" class="med-time-btn min-h-[42px] rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition">30m</button>
             </div>
           </div>
 
-          <!-- 4-Part Pranayama Selector -->
+          <!-- Pranayama Rhythm -->
           <div>
-            <label class="block text-xs uppercase tracking-wider text-amber-500 font-bold mb-2">2. Pranayama Rhythm (Inhale - InHold - Exhale - OutHold)</label>
-            <select id="pranayama-mode" onchange="if(isMeditating){clearTimeout(breathTimeout); runBreathCycle();}" class="w-full themed-input rounded-xl px-4 py-2.5 text-xs md:text-sm focus:outline-none">
+            <label class="block text-xs uppercase tracking-wider text-amber-500 font-bold mb-2">2. Pranayama Ratio (In - Hold - Out - Hold)</label>
+            <select id="pranayama-mode" onchange="if(isMeditating){clearTimeout(breathTimeout); runBreathCycle();}" class="w-full min-h-[44px] themed-input rounded-xl px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none">
               <option value="4-4-4-4">Sama Vritti Box Breath (4s - 4s - 4s - 4s)</option>
               <option value="4-7-8-0">Deep Vagus Nerve Calm (4s - 7s - 8s - 0s)</option>
               <option value="5-0-5-0">Heart Coherence Flow (5s In - 5s Out)</option>
@@ -319,39 +409,42 @@
             </select>
           </div>
 
-          <!-- Sound Healing Synthesizer & Binaural Beats -->
+          <!-- Nada Yoga Soundscape Synthesizer -->
           <div class="space-y-2.5">
             <div class="flex justify-between items-center">
               <label class="text-xs uppercase tracking-wider text-amber-500 font-bold">3. Nada Yoga Soundscapes</label>
-              <input type="range" id="master-volume" min="0.02" max="0.4" step="0.01" value="0.15" oninput="updateMasterVolume(this.value)" class="w-24 accent-amber-500" title="Soundscape Volume">
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] themed-muted uppercase">Vol</span>
+                <input type="range" id="master-volume" min="0.02" max="0.4" step="0.01" value="0.15" oninput="updateMasterVolume(this.value)" class="w-20 sm:w-24 accent-amber-500">
+              </div>
             </div>
 
-            <div class="grid grid-cols-2 gap-2.5">
-              <button id="sound-136" onclick="toggleSoundscape('om136')" class="sound-btn px-3 py-2.5 rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition flex items-center justify-center gap-1.5">
-                <span>🕉️</span> 136.1 Hz Om Drone
+            <div class="grid grid-cols-2 gap-2">
+              <button id="sound-136" onclick="toggleSoundscape('om136')" class="sound-btn min-h-[44px] px-2.5 py-2 rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition flex items-center justify-center gap-1.5">
+                <span>🕉️</span> 136.1 Hz Om
               </button>
-              <button id="sound-432" onclick="toggleSoundscape('cosmic432')" class="sound-btn px-3 py-2.5 rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition flex items-center justify-center gap-1.5">
+              <button id="sound-432" onclick="toggleSoundscape('cosmic432')" class="sound-btn min-h-[44px] px-2.5 py-2 rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition flex items-center justify-center gap-1.5">
                 <span>✨</span> 432 Hz Healing
               </button>
-              <button id="sound-theta" onclick="toggleSoundscape('theta6')" class="sound-btn px-3 py-2.5 rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition flex items-center justify-center gap-1.5">
-                <span>🧠</span> 6 Hz Theta Binaural
+              <button id="sound-theta" onclick="toggleSoundscape('theta6')" class="sound-btn min-h-[44px] px-2.5 py-2 rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition flex items-center justify-center gap-1.5">
+                <span>🧠</span> 6 Hz Theta
               </button>
-              <button id="sound-rain" onclick="toggleSoundscape('pinknoise')" class="sound-btn px-3 py-2.5 rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition flex items-center justify-center gap-1.5">
-                <span>🌧️</span> Sacred Ashram Rain
+              <button id="sound-rain" onclick="toggleSoundscape('pinknoise')" class="sound-btn min-h-[44px] px-2.5 py-2 rounded-xl border border-amber-500/30 text-xs font-medium hover:bg-amber-500/15 transition flex items-center justify-center gap-1.5">
+                <span>🌧️</span> Ashram Rain
               </button>
             </div>
 
-            <button onclick="playSingingBowl(432)" class="w-full py-2 rounded-xl border border-amber-500/40 text-amber-500 text-xs font-semibold uppercase tracking-wider hover:bg-amber-500/15 transition">
-              🔔 Strike Tibetan Singing Bowl (Interval Chime)
+            <button onclick="playSingingBowl(432)" class="w-full min-h-[42px] py-2 rounded-xl border border-amber-500/40 text-amber-500 text-xs font-semibold uppercase tracking-wider hover:bg-amber-500/15 transition">
+              🔔 Strike Tibetan Singing Bowl
             </button>
           </div>
 
-          <!-- Start / Reset Action Buttons -->
-          <div class="pt-2 flex gap-3">
-            <button id="med-start-btn" onclick="toggleMeditation()" class="flex-1 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-sm uppercase tracking-wider shadow-lg shadow-amber-500/25 hover:opacity-95 transition">
+          <!-- Action Buttons -->
+          <div class="pt-1 flex gap-2.5">
+            <button id="med-start-btn" onclick="toggleMeditation()" class="flex-1 min-h-[48px] rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-amber-500/25 active:scale-98 transition">
               Start Meditation
             </button>
-            <button onclick="resetMeditation()" class="px-5 py-3.5 rounded-xl border border-amber-500/30 text-xs font-semibold uppercase hover:bg-amber-500/10 transition">
+            <button onclick="resetMeditation()" class="px-4 sm:px-5 min-h-[48px] rounded-xl border border-amber-500/30 text-xs font-semibold uppercase hover:bg-amber-500/10 transition">
               Reset
             </button>
           </div>
@@ -360,59 +453,63 @@
     </section>
 
     <!-- ==========================================
-         SECTION 2: TRATAKA (YOGIC GAZING) CHAMBER
+         SECTION 2: TRATAKA GAZING DARKROOM
          ========================================== -->
-    <section id="trataka" class="scroll-mt-24">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-amber-500/20 pb-4">
+    <section id="trataka" class="scroll-mt-20">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-5 sm:mb-8 border-b border-amber-500/20 pb-3 sm:pb-4">
         <div>
-          <span class="text-amber-500 text-xs uppercase tracking-widest font-semibold">Module 02 • Shatkarma & Ajna Chakra Purification</span>
-          <h2 class="text-2xl md:text-4xl font-bold mt-1">Trataka Gazing Darkroom</h2>
+          <span class="text-amber-500 text-[11px] uppercase tracking-widest font-semibold">Module 02 • Shatkarma & Ajna Chakra Activation</span>
+          <h2 class="text-xl sm:text-3xl lg:text-4xl font-bold mt-1">Trataka Gazing Chamber</h2>
         </div>
-        <p class="themed-muted text-sm max-w-md mt-2 md:mt-0">
-          Note: The gazing canvas intentionally stays dark even in White Theme to protect your retina and create a crisp Chidakasha after-image.
+        <p class="themed-muted text-xs sm:text-sm max-w-md mt-1.5 md:mt-0">
+          Stays pitch-black in both themes to protect your optic nerves. Works with iOS & Android fullscreen.
         </p>
       </div>
 
-      <div id="trataka-chamber" class="rounded-3xl p-6 md:p-10 relative overflow-hidden bg-[#05040a] text-slate-100 border border-amber-500/30 shadow-2xl">
-        <!-- Top Control Bar -->
-        <div class="flex flex-wrap justify-between items-center gap-4 pb-6 border-b border-slate-800">
-          <!-- 4 Target Modes -->
-          <div class="flex flex-wrap gap-2">
-            <button onclick="setTratakaTarget('jyoti')" id="tab-jyoti" class="btn-active px-3.5 py-2 rounded-xl text-xs uppercase tracking-wider transition">🔥 Jyoti (Flame)</button>
-            <button onclick="setTratakaTarget('bindu')" id="tab-bindu" class="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 text-xs uppercase tracking-wider transition">⚪ Bindu Dot</button>
-            <button onclick="setTratakaTarget('yantra')" id="tab-yantra" class="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 text-xs uppercase tracking-wider transition">۞ Sri Yantra</button>
-            <button onclick="setTratakaTarget('om')" id="tab-om" class="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 text-xs uppercase tracking-wider transition">🕉️ Radiant Om</button>
+      <div id="trataka-chamber" class="rounded-3xl p-4 sm:p-8 lg:p-10 relative overflow-hidden bg-[#05040a] text-slate-100 border border-amber-500/30 shadow-2xl">
+        <!-- Responsive Top Control Bar -->
+        <div class="flex flex-col xl:flex-row justify-between items-stretch xl:items-center gap-3.5 pb-4 sm:pb-6 border-b border-slate-800">
+          <!-- Swipeable Target Tabs on Mobile -->
+          <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 sm:pb-0">
+            <button onclick="setTratakaTarget('jyoti')" id="tab-jyoti" class="btn-active shrink-0 min-h-[40px] px-3.5 py-2 rounded-xl text-xs uppercase tracking-wider transition">🔥 Jyoti Flame</button>
+            <button onclick="setTratakaTarget('bindu')" id="tab-bindu" class="shrink-0 min-h-[40px] px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 text-xs uppercase tracking-wider transition">⚪ Bindu Dot</button>
+            <button onclick="setTratakaTarget('yantra')" id="tab-yantra" class="shrink-0 min-h-[40px] px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 text-xs uppercase tracking-wider transition">۞ Sri Yantra</button>
+            <button onclick="setTratakaTarget('om')" id="tab-om" class="shrink-0 min-h-[40px] px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 text-xs uppercase tracking-wider transition">🕉️ Radiant Om</button>
           </div>
 
-          <!-- Duration + Controls -->
-          <div class="flex flex-wrap items-center gap-2.5">
-            <select id="trataka-duration-select" onchange="changeTratakaDuration(this.value)" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-amber-400">
-              <option value="120">2 Mins</option>
-              <option value="180" selected>3 Mins</option>
-              <option value="300">5 Mins</option>
-              <option value="600">10 Mins</option>
-            </select>
-            <span id="trataka-timer" class="font-mono text-2xl text-amber-400 font-bold px-2">03:00</span>
-            <button onclick="toggleTratakaTimer()" id="trataka-start-btn" class="px-4 py-2 rounded-xl bg-amber-500 text-black font-bold text-xs uppercase hover:bg-amber-400 transition">
-              Start Gaze
-            </button>
-            <button onclick="resetTratakaTimer()" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 text-xs hover:border-amber-400 transition">
-              Reset
-            </button>
-            <button onclick="toggleFullScreenTrataka()" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-amber-300 text-xs hover:border-amber-400 transition">
-              ⛶ Fullscreen
-            </button>
+          <!-- Timer & Fullscreen Controls -->
+          <div class="flex flex-wrap items-center justify-between sm:justify-end gap-2">
+            <div class="flex items-center gap-2">
+              <select id="trataka-duration-select" onchange="changeTratakaDuration(this.value)" class="min-h-[40px] bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xs text-amber-400">
+                <option value="120">2m</option>
+                <option value="180" selected>3m</option>
+                <option value="300">5m</option>
+                <option value="600">10m</option>
+              </select>
+              <span id="trataka-timer" class="font-mono text-xl sm:text-2xl text-amber-400 font-bold px-1">03:00</span>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2">
+              <button onclick="toggleTratakaTimer()" id="trataka-start-btn" class="min-h-[40px] px-3.5 py-2 rounded-xl bg-amber-500 text-black font-bold text-xs uppercase hover:bg-amber-400 transition">
+                Start Gaze
+              </button>
+              <button onclick="resetTratakaTimer()" class="min-h-[40px] px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 text-xs hover:border-amber-400 transition">
+                Reset
+              </button>
+              <button onclick="toggleFullScreenTrataka()" id="trataka-fs-btn" class="min-h-[40px] px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-amber-300 text-xs hover:border-amber-400 transition">
+                ⛶ Fullscreen
+              </button>
+            </div>
           </div>
         </div>
 
         <!-- Central Gazing Stage -->
-        <div class="min-h-[410px] flex flex-col items-center justify-center relative py-10">
-
+        <div class="min-h-[320px] sm:min-h-[410px] flex flex-col items-center justify-center relative py-8">
           <!-- Target 1: Jyoti Candle Flame -->
           <div id="target-jyoti" class="flex flex-col items-center justify-center">
             <div class="relative flex items-center justify-center">
-              <div class="absolute w-44 h-44 rounded-full bg-amber-500/20 blur-2xl"></div>
-              <svg id="svg-flame" class="w-28 h-44 candle-flame" viewBox="0 0 100 160" fill="none">
+              <div class="absolute w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-amber-500/20 blur-2xl"></div>
+              <svg id="svg-flame" class="w-24 h-36 sm:w-28 sm:h-44 candle-flame" viewBox="0 0 100 160" fill="none">
                 <path d="M50 10 C25 55, 18 90, 50 120 C82 90, 75 55, 50 10 Z" fill="url(#flameOuter)"/>
                 <path d="M50 32 C34 65, 30 92, 50 116 C70 92, 66 65, 50 32 Z" fill="url(#flameMid)"/>
                 <path d="M50 72 C43 88, 43 105, 50 115 C57 105, 57 88, 50 72 Z" fill="#ffffff"/>
@@ -431,35 +528,35 @@
                 </defs>
               </svg>
             </div>
-            <label class="mt-5 flex items-center gap-2 text-xs text-slate-400 cursor-pointer">
-              <input type="checkbox" id="still-flame-toggle" onchange="toggleFlameStillness()" class="accent-amber-500">
-              Lock Flame Stillness (Zero Wind Mode)
+            <label class="mt-4 flex items-center gap-2 text-xs text-slate-400 cursor-pointer py-1">
+              <input type="checkbox" id="still-flame-toggle" onchange="toggleFlameStillness()" class="accent-amber-500 w-4 h-4">
+              Freeze Flame Flicker (Zero-Wind Stillness)
             </label>
           </div>
 
-          <!-- Target 2: Bindu Dot (With Color & Size Controls) -->
+          <!-- Target 2: Bindu Dot -->
           <div id="target-bindu" class="hidden flex-col items-center justify-center">
-            <div class="w-44 h-44 rounded-full border border-amber-500/20 flex items-center justify-center">
+            <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-full border border-amber-500/20 flex items-center justify-center">
               <div id="bindu-dot" class="w-5 h-5 rounded-full bg-amber-400 shadow-[0_0_25px_#f59e0b]"></div>
             </div>
-            <div class="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400">
+            <div class="mt-6 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs text-slate-400">
               <div class="flex items-center gap-2">
                 <span>Size:</span>
-                <input type="range" min="6" max="42" value="20" oninput="resizeBindu(this.value)" class="accent-amber-500">
+                <input type="range" min="6" max="42" value="20" oninput="resizeBindu(this.value)" class="accent-amber-500 w-24">
               </div>
-              <div class="flex items-center gap-2">
+              <div class="flex items-center gap-2.5">
                 <span>Color:</span>
-                <button onclick="colorBindu('#f59e0b')" class="w-5 h-5 rounded-full bg-amber-500 border border-white"></button>
-                <button onclick="colorBindu('#ef4444')" class="w-5 h-5 rounded-full bg-red-500 border border-white"></button>
-                <button onclick="colorBindu('#ffffff')" class="w-5 h-5 rounded-full bg-white border border-slate-400"></button>
-                <button onclick="colorBindu('#38bdf8')" class="w-5 h-5 rounded-full bg-sky-400 border border-white"></button>
+                <button onclick="colorBindu('#f59e0b')" class="w-6 h-6 rounded-full bg-amber-500 border border-white"></button>
+                <button onclick="colorBindu('#ef4444')" class="w-6 h-6 rounded-full bg-red-500 border border-white"></button>
+                <button onclick="colorBindu('#ffffff')" class="w-6 h-6 rounded-full bg-white border border-slate-400"></button>
+                <button onclick="colorBindu('#38bdf8')" class="w-6 h-6 rounded-full bg-sky-400 border border-white"></button>
               </div>
             </div>
           </div>
 
           <!-- Target 3: Sri Yantra -->
           <div id="target-yantra" class="hidden flex-col items-center justify-center">
-            <svg class="w-64 h-64" viewBox="0 0 200 200" fill="none">
+            <svg class="w-56 h-56 sm:w-64 sm:h-64" viewBox="0 0 200 200" fill="none">
               <circle cx="100" cy="100" r="92" stroke="#f59e0b" stroke-width="1"/>
               <circle cx="100" cy="100" r="72" stroke="#a855f7" stroke-width="0.9"/>
               <polygon points="100,22 170,145 30,145" stroke="#f59e0b" stroke-width="1.3"/>
@@ -468,45 +565,45 @@
               <polygon points="100,158 152,68 48,68" stroke="#f59e0b" stroke-width="1"/>
               <circle cx="100" cy="100" r="4.5" fill="#ef4444"/>
             </svg>
-            <p class="text-xs text-slate-400 mt-4">Focus unblinkingly on the red Bindu at the center of the triangles.</p>
+            <p class="text-xs text-slate-400 mt-3 text-center px-4">Gaze steadily at the central red Bindu point.</p>
           </div>
 
-          <!-- Target 4: Radiant Om Symbol -->
+          <!-- Target 4: Radiant Om -->
           <div id="target-om" class="hidden flex-col items-center justify-center">
             <div class="relative flex items-center justify-center">
-              <div class="absolute w-48 h-48 rounded-full bg-purple-500/20 blur-2xl"></div>
-              <div class="text-8xl md:text-9xl text-amber-400 drop-shadow-[0_0_30px_rgba(245,158,11,0.8)] select-none">ॐ</div>
+              <div class="absolute w-40 h-40 rounded-full bg-purple-500/20 blur-2xl"></div>
+              <div class="text-7xl sm:text-9xl text-amber-400 drop-shadow-[0_0_30px_rgba(245,158,11,0.8)] select-none">ॐ</div>
             </div>
-            <p class="text-xs text-slate-400 mt-6">Gaze at the Bindu crescent crown above the sacred Pranava Om.</p>
+            <p class="text-xs text-slate-400 mt-5 text-center px-4">Focus on the crescent Bindu crown above the Om symbol.</p>
           </div>
         </div>
 
         <!-- Eye Palming Recovery Guide -->
-        <div class="border-t border-slate-800 pt-4 flex flex-col md:flex-row justify-between items-center text-xs text-slate-400 gap-2">
-          <span>👁️ <strong class="text-amber-400">Step 1 (External Gaze):</strong> Keep eyes gently open without blinking until tears form naturally.</span>
-          <span>🤲 <strong class="text-emerald-400">Step 2 (Eye Palming):</strong> Rub palms briskly until warm, cup over closed eyes, and observe the inner light.</span>
+        <div class="border-t border-slate-800 pt-3.5 flex flex-col sm:flex-row justify-between items-start sm:items-center text-[11px] sm:text-xs text-slate-400 gap-2">
+          <span>👁️ <strong class="text-amber-400">Step 1 (Bahiranga):</strong> Gaze at eye level without blinking until tears gently cleanse the eyes.</span>
+          <span>🤲 <strong class="text-emerald-400">Step 2 (Palming):</strong> Rub palms warm, cup over closed eyes, and visualize the inner flame.</span>
         </div>
       </div>
     </section>
 
     <!-- ==========================================
-         SECTION 3: 108 JAPA MALA WITH AUTO-PACER
+         SECTION 3: 108 JAPA MALA (HAPTIC + TOUCH)
          ========================================== -->
-    <section id="japa" class="scroll-mt-24">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-amber-500/20 pb-4">
+    <section id="japa" class="scroll-mt-20">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-5 sm:mb-8 border-b border-amber-500/20 pb-3 sm:pb-4">
         <div>
-          <span class="text-amber-500 text-xs uppercase tracking-widest font-semibold">Module 03 • Mantra Sadhana & Auto-Chant Pacer</span>
-          <h2 class="text-2xl md:text-4xl font-bold mt-1">108 Rudraksha Japa Mala</h2>
+          <span class="text-amber-500 text-[11px] uppercase tracking-widest font-semibold">Module 03 • Tactile Haptic & Voice Japa Counter</span>
+          <h2 class="text-xl sm:text-3xl lg:text-4xl font-bold mt-1">108 Rudraksha Japa Mala</h2>
         </div>
-        <p class="themed-muted text-sm max-w-md mt-2 md:mt-0">
-          Tap the Mala circle, press <kbd class="px-2 py-0.5 bg-amber-500/20 border border-amber-500/40 rounded text-amber-500 font-semibold">Spacebar</kbd>, or activate the hands-free **Auto-Japa Pacer**.
+        <p class="themed-muted text-xs sm:text-sm max-w-md mt-1.5 md:mt-0">
+          Tap the Mala ring (triggers phone vibration on mobile), press <kbd class="px-1.5 py-0.5 bg-amber-500/20 border border-amber-500/40 rounded text-amber-500 font-semibold">Spacebar</kbd> on desktop, or run Auto-Japa.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Left: Interactive 108 Bead SVG Ring -->
-        <div class="lg:col-span-7 glass-card rounded-3xl p-8 flex flex-col items-center justify-center relative">
-          <div class="relative w-72 h-72 md:w-84 md:h-84 flex items-center justify-center cursor-pointer select-none" onclick="advanceJapaBead()">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 items-center">
+        <!-- Left: Responsive 108 Bead SVG Ring -->
+        <div class="lg:col-span-7 glass-card rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center relative">
+          <div class="relative w-[260px] h-[260px] sm:w-80 sm:h-80 flex items-center justify-center cursor-pointer select-none active:scale-[0.99] transition" onclick="advanceJapaBead()">
             <svg id="mala-svg" class="w-full h-full -rotate-90" viewBox="0 0 240 240">
               <circle cx="120" cy="120" r="98" stroke="rgba(245, 158, 11, 0.25)" stroke-width="1.5" fill="none"/>
               <g id="mala-beads-group"></g>
@@ -515,38 +612,43 @@
             </svg>
 
             <!-- Central Counter Readout -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none px-8">
-              <span class="text-[11px] uppercase tracking-widest text-amber-500 font-semibold">Bead Progress</span>
-              <span id="japa-count" class="text-6xl font-bold font-mono my-1">0</span>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none px-6">
+              <span class="text-[10px] sm:text-[11px] uppercase tracking-widest text-amber-500 font-semibold">Tap Circle to Chant</span>
+              <span id="japa-count" class="text-5xl sm:text-6xl font-bold font-mono my-1">0</span>
               <span class="text-xs themed-muted">of <span id="japa-target-label">108</span> Beads</span>
-              <span id="active-japa-mantra" class="mt-3 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-500 text-xs font-semibold max-w-[190px] truncate">
+              <span id="active-japa-mantra" class="mt-2.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-500 text-[11px] sm:text-xs font-semibold max-w-[175px] sm:max-w-[200px] truncate">
                 Om Gam Ganapataye Namaha
               </span>
             </div>
           </div>
 
-          <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
-            <button onclick="speakCurrentJapaMantra()" class="px-4 py-1.5 rounded-full bg-purple-500/15 border border-purple-500/40 text-purple-400 text-xs font-semibold hover:bg-purple-500 hover:text-white transition">
+          <div class="mt-3 flex flex-wrap items-center justify-center gap-2">
+            <button onclick="speakCurrentJapaMantra()" class="min-h-[38px] px-4 py-1.5 rounded-full bg-purple-500/15 border border-purple-500/40 text-purple-400 text-xs font-semibold hover:bg-purple-500 hover:text-white transition">
               🔊 Pronounce Active Mantra
             </button>
           </div>
         </div>
 
-        <!-- Right: Japa Controls, Target & Auto-Pacer -->
-        <div class="lg:col-span-5 glass-card rounded-3xl p-7 space-y-5">
-          <!-- Session & Target Selector -->
-          <div class="grid grid-cols-3 gap-3">
-            <div class="p-3.5 rounded-2xl border border-amber-500/20 text-center">
-              <span class="text-[11px] themed-muted uppercase block">Session Malas</span>
-              <div id="mala-rounds" class="text-2xl font-bold text-amber-500 mt-0.5">0</div>
+        <!-- Right: Japa Controls & Auto-Pacer -->
+        <div class="lg:col-span-5 glass-card rounded-3xl p-5 sm:p-7 space-y-4 sm:space-y-5">
+          <!-- Giant Thumb-Friendly Tap Button for Mobile Eyes-Closed Japa -->
+          <button onclick="advanceJapaBead()" class="w-full min-h-[58px] sm:min-h-[52px] rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg shadow-amber-500/25 active:scale-95 transition flex items-center justify-center gap-2">
+            <span>📿</span> +1 Chant Bead (Eyes-Closed Tap Zone)
+          </button>
+
+          <!-- Stats & Target Grid -->
+          <div class="grid grid-cols-3 gap-2.5">
+            <div class="p-3 rounded-2xl border border-amber-500/20 text-center">
+              <span class="text-[10px] themed-muted uppercase block">Session Malas</span>
+              <div id="mala-rounds" class="text-xl sm:text-2xl font-bold text-amber-500 mt-0.5">0</div>
             </div>
-            <div class="p-3.5 rounded-2xl border border-amber-500/20 text-center">
-              <span class="text-[11px] themed-muted uppercase block">Session Chants</span>
-              <div id="total-chants" class="text-2xl font-bold text-purple-500 mt-0.5">0</div>
+            <div class="p-3 rounded-2xl border border-amber-500/20 text-center">
+              <span class="text-[10px] themed-muted uppercase block">Session Beads</span>
+              <div id="total-chants" class="text-xl sm:text-2xl font-bold text-purple-500 mt-0.5">0</div>
             </div>
-            <div class="p-3.5 rounded-2xl border border-amber-500/20 text-center">
-              <span class="text-[11px] themed-muted uppercase block">Mala Target</span>
-              <select id="japa-target-select" onchange="setJapaTarget(this.value)" class="bg-transparent font-bold text-lg text-emerald-500 focus:outline-none mt-0.5">
+            <div class="p-3 rounded-2xl border border-amber-500/20 text-center">
+              <span class="text-[10px] themed-muted uppercase block">Bead Target</span>
+              <select id="japa-target-select" onchange="setJapaTarget(this.value)" class="bg-transparent font-bold text-base sm:text-lg text-emerald-500 focus:outline-none mt-0.5">
                 <option value="27" class="bg-slate-900 text-white">27</option>
                 <option value="54" class="bg-slate-900 text-white">54</option>
                 <option value="108" selected class="bg-slate-900 text-white">108</option>
@@ -554,107 +656,104 @@
             </div>
           </div>
 
-          <!-- Active Mantra Text Input -->
+          <!-- Active Mantra Input -->
           <div>
-            <label class="block text-xs uppercase tracking-wider text-amber-500 font-bold mb-1.5">Active Mantra</label>
+            <label class="block text-xs uppercase tracking-wider text-amber-500 font-bold mb-1.5">Active Sankalpa Mantra</label>
             <input id="custom-mantra-input" type="text" value="Om Gam Ganapataye Namaha" oninput="updateActiveMantra(this.value)"
-              class="w-full themed-input rounded-xl px-4 py-2.5 text-sm focus:outline-none">
+              class="w-full min-h-[44px] themed-input rounded-xl px-3.5 py-2 text-xs sm:text-sm focus:outline-none">
           </div>
 
           <!-- Hands-Free Auto-Japa Pacer -->
-          <div class="p-4 rounded-2xl border border-amber-500/25 bg-amber-500/5 space-y-3">
+          <div class="p-3.5 sm:p-4 rounded-2xl border border-amber-500/25 bg-amber-500/5 space-y-2.5">
             <div class="flex justify-between items-center">
-              <span class="text-xs font-bold uppercase tracking-wider text-amber-500">⚡ Auto-Japa Hands-Free Pacer</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-amber-500">⚡ Auto-Japa Pacer</span>
               <span id="auto-japa-speed-label" class="text-xs font-mono themed-muted">Every 3.0s</span>
             </div>
             <div class="flex items-center gap-3">
               <input type="range" id="auto-japa-slider" min="1" max="8" step="0.5" value="3" oninput="updateAutoJapaSpeed(this.value)" class="flex-1 accent-amber-500">
-              <button id="auto-japa-btn" onclick="toggleAutoJapa()" class="px-4 py-2 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-500 text-xs font-bold uppercase hover:bg-amber-500 hover:text-white transition">
+              <button id="auto-japa-btn" onclick="toggleAutoJapa()" class="min-h-[38px] px-3.5 py-1.5 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-500 text-xs font-bold uppercase hover:bg-amber-500 hover:text-white transition">
                 Start Auto
               </button>
             </div>
           </div>
 
-          <!-- Audio & Voice Toggles -->
-          <div class="grid grid-cols-2 gap-3 text-xs">
-            <label class="flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-amber-500/20 cursor-pointer">
-              <span>Rudraksha Click</span>
+          <!-- Audio, Voice & Haptic Toggles -->
+          <div class="grid grid-cols-3 gap-2 text-[11px] sm:text-xs">
+            <label class="flex items-center justify-between px-2.5 py-2.5 rounded-xl border border-amber-500/20 cursor-pointer">
+              <span>Wood Click</span>
               <input type="checkbox" id="japa-sound-toggle" checked class="accent-amber-500 w-4 h-4">
             </label>
-            <label class="flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-amber-500/20 cursor-pointer">
-              <span>Voice Chant (TTS)</span>
+            <label class="flex items-center justify-between px-2.5 py-2.5 rounded-xl border border-amber-500/20 cursor-pointer">
+              <span>Haptic Vib</span>
+              <input type="checkbox" id="japa-vibrate-toggle" checked class="accent-amber-500 w-4 h-4">
+            </label>
+            <label class="flex items-center justify-between px-2.5 py-2.5 rounded-xl border border-amber-500/20 cursor-pointer">
+              <span>Voice TTS</span>
               <input type="checkbox" id="japa-tts-toggle" class="accent-amber-500 w-4 h-4">
             </label>
           </div>
 
-          <!-- Manual Chant & Reset Buttons -->
-          <div class="flex gap-3">
-            <button onclick="advanceJapaBead()" class="flex-1 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-sm uppercase tracking-wider shadow-lg shadow-amber-500/25 active:scale-95 transition">
-              +1 Chant Bead
-            </button>
-            <button onclick="resetJapa()" class="px-5 py-3.5 rounded-xl border border-amber-500/30 text-xs font-semibold uppercase hover:bg-amber-500/10 transition">
-              Reset
-            </button>
-          </div>
+          <button onclick="resetJapa()" class="w-full min-h-[42px] rounded-xl border border-amber-500/30 text-xs font-semibold uppercase hover:bg-amber-500/10 transition">
+            Reset Session Counter
+          </button>
         </div>
       </div>
     </section>
 
     <!-- ==========================================
-         SECTION 4: 7 CHAKRA KUNDALINI TUNER (NEW)
+         SECTION 4: 7-CHAKRA KUNDALINI TUNER
          ========================================== -->
-    <section id="chakras" class="scroll-mt-24">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-amber-500/20 pb-4">
+    <section id="chakras" class="scroll-mt-20">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-5 sm:mb-8 border-b border-amber-500/20 pb-3 sm:pb-4">
         <div>
-          <span class="text-amber-500 text-xs uppercase tracking-widest font-semibold">Module 04 • Sushumna Nadi & Solfeggio Harmonics</span>
-          <h2 class="text-2xl md:text-4xl font-bold mt-1">7-Chakra Kundalini & Beej Tuner</h2>
+          <span class="text-amber-500 text-[11px] uppercase tracking-widest font-semibold">Module 04 • Sushumna Nadi & Solfeggio Harmonics</span>
+          <h2 class="text-xl sm:text-3xl lg:text-4xl font-bold mt-1">7-Chakra Kundalini Tuner</h2>
         </div>
-        <p class="themed-muted text-sm max-w-md mt-2 md:mt-0">
-          Click any Chakra to play its exact Solfeggio harmonic frequency, hear its Sanskrit Beej syllable, and load its mantra.
+        <p class="themed-muted text-xs sm:text-sm max-w-md mt-1.5 md:mt-0">
+          Tap any Chakra card to play its Solfeggio frequency, speak its Beej syllable, and load it into your Japa Mala.
         </p>
       </div>
 
-      <div id="chakra-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-4">
-        <!-- Injected dynamically via JS -->
-      </div>
+      <!-- Responsive Grid: 2 cols on mobile, 4 on tablet, 7 on desktop -->
+      <div id="chakra-grid" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4"></div>
     </section>
 
     <!-- ==========================================
-         SECTION 5: ALL DEITIES BEEJ MANTRAS (32 DEITIES)
+         SECTION 5: ALL 32 DEITIES BEEJ MANTRAS
          ========================================== -->
-    <section id="beej-mantras" class="scroll-mt-24">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-amber-500/20 pb-4">
+    <section id="beej-mantras" class="scroll-mt-20">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-5 sm:mb-8 border-b border-amber-500/20 pb-3 sm:pb-4">
         <div>
-          <span class="text-amber-500 text-xs uppercase tracking-widest font-semibold">Module 05 • Complete Vedic & Tantric Seed syllables</span>
-          <h2 class="text-2xl md:text-4xl font-bold mt-1">Encyclopedia of All Beej Mantras</h2>
+          <span class="text-amber-500 text-[11px] uppercase tracking-widest font-semibold">Module 05 • Complete Vedic & Tantric Seed Syllables</span>
+          <h2 class="text-xl sm:text-3xl lg:text-4xl font-bold mt-1">Encyclopedia of All Beej Mantras</h2>
         </div>
-        <p class="themed-muted text-sm max-w-md mt-2 md:mt-0">
-          Includes <strong class="text-amber-500">🔊 Listen</strong> voice synthesis, <strong class="text-amber-500">📋 Copy</strong>, and <strong class="text-amber-500">📿 Load to Japa</strong> for 32 Deities, Mahavidyas & Navagrahas.
+        <p class="themed-muted text-xs sm:text-sm max-w-md mt-1.5 md:mt-0">
+          Swipe categories horizontally on mobile or search across 32 Deities, Tridevi, 10 Mahavidyas, and 9 Navagrahas.
         </p>
       </div>
 
-      <!-- Filter Tabs (Fixed Active Highlighting) & Search -->
-      <div class="flex flex-col md:flex-row justify-between gap-4 mb-8">
-        <div class="flex flex-wrap gap-2">
-          <button onclick="filterMantras('all', this)" class="mantra-filter-btn btn-active px-4 py-2 rounded-full border border-amber-500/30 text-xs uppercase tracking-wider transition">All Deities (32)</button>
-          <button onclick="filterMantras('Supreme & Trimurti', this)" class="mantra-filter-btn px-4 py-2 rounded-full border border-amber-500/30 text-xs uppercase tracking-wider hover:bg-amber-500/15 transition">Supreme & Devas</button>
-          <button onclick="filterMantras('Devi & Shakti', this)" class="mantra-filter-btn px-4 py-2 rounded-full border border-amber-500/30 text-xs uppercase tracking-wider hover:bg-amber-500/15 transition">Tridevi & Shakti</button>
-          <button onclick="filterMantras('Das Mahavidya', this)" class="mantra-filter-btn px-4 py-2 rounded-full border border-amber-500/30 text-xs uppercase tracking-wider hover:bg-amber-500/15 transition">10 Mahavidyas</button>
-          <button onclick="filterMantras('Navagraha', this)" class="mantra-filter-btn px-4 py-2 rounded-full border border-amber-500/30 text-xs uppercase tracking-wider hover:bg-amber-500/15 transition">9 Navagrahas</button>
+      <!-- Mobile Horizontal Swipeable Filter Pills + Full-Width Search -->
+      <div class="flex flex-col lg:flex-row justify-between gap-3.5 mb-6 sm:mb-8">
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+          <button onclick="filterMantras('all', this)" class="mantra-filter-btn btn-active shrink-0 min-h-[38px] px-4 py-1.5 rounded-full border border-amber-500/30 text-xs uppercase tracking-wider transition">All (32)</button>
+          <button onclick="filterMantras('Supreme & Trimurti', this)" class="mantra-filter-btn shrink-0 min-h-[38px] px-4 py-1.5 rounded-full border border-amber-500/30 text-xs uppercase tracking-wider hover:bg-amber-500/15 transition">Supreme & Devas</button>
+          <button onclick="filterMantras('Devi & Shakti', this)" class="mantra-filter-btn shrink-0 min-h-[38px] px-4 py-1.5 rounded-full border border-amber-500/30 text-xs uppercase tracking-wider hover:bg-amber-500/15 transition">Tridevi & Shakti</button>
+          <button onclick="filterMantras('Das Mahavidya', this)" class="mantra-filter-btn shrink-0 min-h-[38px] px-4 py-1.5 rounded-full border border-amber-500/30 text-xs uppercase tracking-wider hover:bg-amber-500/15 transition">10 Mahavidyas</button>
+          <button onclick="filterMantras('Navagraha', this)" class="mantra-filter-btn shrink-0 min-h-[38px] px-4 py-1.5 rounded-full border border-amber-500/30 text-xs uppercase tracking-wider hover:bg-amber-500/15 transition">9 Navagrahas</button>
         </div>
 
         <input type="text" id="mantra-search" oninput="searchMantras(this.value)" placeholder="Search deity, seed (Shreem, Kleem), benefit..."
-          class="themed-input rounded-full px-5 py-2 text-sm focus:outline-none min-w-[260px]">
+          class="w-full lg:w-72 min-h-[42px] themed-input rounded-full px-4 py-2 text-xs sm:text-sm focus:outline-none">
       </div>
 
-      <!-- Dynamic Beej Mantra Cards Grid -->
-      <div id="mantra-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <!-- Responsive Cards Grid: 1 col mobile, 2 cols tablet, 3 cols desktop -->
+      <div id="mantra-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"></div>
     </section>
 
   </main>
 
-  <footer class="border-t border-amber-500/20 py-8 text-center text-xs themed-muted mt-16">
-    <p>Prana & Nada Pro • Vedic Sound Healing, Shatkarma Trataka & Mantra Shastra Portal • ॐ शांतिः शांतिः शांतिः</p>
+  <footer class="border-t border-amber-500/20 py-8 text-center text-xs themed-muted mt-12 px-4">
+    <p>Prana & Nada Pro • Optimized for Mobile & Desktop • ॐ सर्वे भवन्तु सुखिनः</p>
   </footer>
 
   <!-- ==========================================
@@ -662,7 +761,7 @@
        ========================================== -->
   <script>
     /* --------------------------------------------------
-       0. THEME SWITCHER, PANCHANG TITHI & LOCALSTORAGE
+       0. THEME, WAKE LOCK, MOBILE NAV & LOCALSTORAGE
        -------------------------------------------------- */
     let sadhanaStats = JSON.parse(localStorage.getItem('sadhana_stats')) || {
       medMins: 0,
@@ -672,16 +771,21 @@
       theme: "dark"
     };
 
+    function setMobNavActive(el) {
+      document.querySelectorAll('.mob-nav-item').forEach(i => i.classList.remove('mob-nav-active'));
+      el.classList.add('mob-nav-active');
+    }
+
     function applyTheme(theme) {
       document.documentElement.setAttribute('data-theme', theme);
       const icon = document.getElementById('theme-icon');
       const label = document.getElementById('theme-label');
       if (theme === 'light') {
         icon.textContent = '🌙';
-        label.textContent = 'Chandra (Dark Theme)';
+        label.textContent = 'Chandra (Dark)';
       } else {
         icon.textContent = '☀️';
-        label.textContent = 'Surya (White Theme)';
+        label.textContent = 'Surya (White)';
       }
       sadhanaStats.theme = theme;
       saveStats();
@@ -705,26 +809,54 @@
       saveStats();
     }
 
-    // Calculate Approximate Lunar Phase / Vedic Tithi
+    // Screen Wake Lock API (Keeps Mobile Screen On During Meditation/Trataka)
+    let wakeLockSentinel = null;
+    async function toggleWakeLock() {
+      const icon = document.getElementById('wakelock-icon');
+      const text = document.getElementById('wakelock-text');
+      const btn = document.getElementById('wakelock-btn');
+
+      if (!('wakeLock' in navigator)) {
+        alert('Screen Wake Lock is automatically managed by your browser.');
+        return;
+      }
+
+      try {
+        if (wakeLockSentinel) {
+          await wakeLockSentinel.release();
+          wakeLockSentinel = null;
+          icon.textContent = '🔓';
+          text.textContent = 'Screen Awake: Off';
+          btn.classList.remove('btn-active');
+        } else {
+          wakeLockSentinel = await navigator.wakeLock.request('screen');
+          icon.textContent = '🔒';
+          text.textContent = 'Screen Awake: On';
+          btn.classList.add('btn-active');
+        }
+      } catch (err) {
+        console.log('WakeLock note:', err);
+      }
+    }
+
+    // Approximate Lunar Tithi Calculation
     function computeLunarTithi() {
       const synodic = 29.53058867;
       const knownNewMoon = new Date('2025-01-29T12:36:00Z').getTime();
-      const now = Date.now();
-      const diffDays = ((now - knownNewMoon) / (1000 * 60 * 60 * 24)) % synodic;
+      const diffDays = ((Date.now() - knownNewMoon) / (1000 * 60 * 60 * 24)) % synodic;
       const age = diffDays < 0 ? diffDays + synodic : diffDays;
       const tithiNum = Math.floor((age / synodic) * 30) + 1;
-      const paksha = tithiNum <= 15 ? 'Shukla Paksha (Waxing)' : 'Krishna Paksha (Waning)';
+      const paksha = tithiNum <= 15 ? 'Shukla Paksha' : 'Krishna Paksha';
       const tithiNames = [
         "Pratipada", "Dwitiya", "Tritiya", "Chaturthi", "Panchami",
         "Shashthi", "Saptami", "Ashtami", "Navami", "Dashami",
-        "Ekadashi", "Dwadashi", "Trayodashi", "Chaturdashi", "Purnima / Amavasya"
+        "Ekadashi", "Dwadashi", "Trayodashi", "Chaturdashi", "Purnima/Amavasya"
       ];
-      const name = tithiNames[(tithiNum - 1) % 15];
-      document.getElementById('tithi-badge').textContent = `🌙 ${paksha} • ${name} Tithi`;
+      document.getElementById('tithi-badge').textContent = `🌙 ${paksha} • ${tithiNames[(tithiNum - 1) % 15]}`;
     }
 
     /* --------------------------------------------------
-       1. WEB AUDIO SYNTHESIZER (DRONES, BINAURAL, RAIN, BOWL)
+       1. WEB AUDIO SYNTHESIZER
        -------------------------------------------------- */
     let audioCtx = null;
     let activeSoundNode = null;
@@ -784,7 +916,6 @@
         osc2.start();
         sources.push(osc1, osc2);
       } else if (type === 'theta6') {
-        // 200Hz Left + 206Hz Right = 6Hz Theta Binaural Beat
         const merger = audioCtx.createChannelMerger(2);
         const oscL = audioCtx.createOscillator();
         const oscR = audioCtx.createOscillator();
@@ -797,7 +928,6 @@
         oscR.start();
         sources.push(oscL, oscR);
       } else if (type === 'pinknoise') {
-        // Soothing Ashram Rain / Pink Noise Buffer
         const bufferSize = audioCtx.sampleRate * 3;
         const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
         const output = buffer.getChannelData(0);
@@ -838,15 +968,18 @@
         osc.frequency.setValueAtTime(f, now);
         gain.gain.setValueAtTime(0.001, now);
         gain.gain.exponentialRampToValueAtTime(0.22 / (idx + 1), now + 0.06);
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + 4.8);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 4.5);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start(now);
-        osc.stop(now + 4.9);
+        osc.stop(now + 4.6);
       });
     }
 
     function playBeadClick(isSumeru = false) {
+      if (document.getElementById('japa-vibrate-toggle').checked && 'vibrate' in navigator) {
+        navigator.vibrate(isSumeru ? [60, 40, 90] : 18);
+      }
       if (!document.getElementById('japa-sound-toggle').checked) return;
       initAudio();
       const now = audioCtx.currentTime;
@@ -864,7 +997,7 @@
     }
 
     /* --------------------------------------------------
-       2. WEB SPEECH API SANSKRIT PRONUNCIATION
+       2. WEB SPEECH SANSKRIT PRONUNCIATION
        -------------------------------------------------- */
     function speakMantraText(text) {
       if (!('speechSynthesis' in window)) return;
@@ -921,33 +1054,29 @@
       const label = document.getElementById('breath-instruction');
       const sub = document.getElementById('breath-subtext');
 
-      // 1. Puraka (Inhale)
       circle.style.transitionDuration = `${inhale}s`;
-      circle.className = 'lotus-circle w-48 h-48 rounded-full border-2 border-amber-500 flex flex-col items-center justify-center relative breathe-in';
+      circle.className = 'lotus-circle w-36 h-36 sm:w-48 sm:h-48 rounded-full border-2 border-amber-500 flex flex-col items-center justify-center relative breathe-in';
       label.textContent = 'Puraka (Inhale)';
       sub.textContent = `Inhale slowly for ${inhale} seconds...`;
 
       breathTimeout = setTimeout(() => {
         if (!isMeditating) return;
-        // 2. Antara Kumbhaka (Internal Hold)
         if (inHold > 0) {
           circle.style.transitionDuration = '0.4s';
-          circle.className = 'lotus-circle w-48 h-48 rounded-full border-2 border-purple-500 flex flex-col items-center justify-center relative breathe-hold';
+          circle.className = 'lotus-circle w-36 h-36 sm:w-48 sm:h-48 rounded-full border-2 border-purple-500 flex flex-col items-center justify-center relative breathe-hold';
           label.textContent = 'Antara Kumbhaka';
           sub.textContent = `Hold breath inside for ${inHold} seconds...`;
         }
 
         breathTimeout = setTimeout(() => {
           if (!isMeditating) return;
-          // 3. Rechaka (Exhale)
           circle.style.transitionDuration = `${exhale}s`;
-          circle.className = 'lotus-circle w-48 h-48 rounded-full border-2 border-amber-500/60 flex flex-col items-center justify-center relative breathe-out';
+          circle.className = 'lotus-circle w-36 h-36 sm:w-48 sm:h-48 rounded-full border-2 border-amber-500/60 flex flex-col items-center justify-center relative breathe-out';
           label.textContent = 'Rechaka (Exhale)';
           sub.textContent = `Exhale gently for ${exhale} seconds...`;
 
           breathTimeout = setTimeout(() => {
             if (!isMeditating) return;
-            // 4. Bahya Kumbhaka (External Hold)
             if (outHold > 0) {
               label.textContent = 'Bahya Kumbhaka';
               sub.textContent = `Rest in stillness for ${outHold} seconds...`;
@@ -996,11 +1125,11 @@
       document.getElementById('med-start-btn').textContent = 'Start Meditation';
       document.getElementById('breath-instruction').textContent = 'Ready';
       document.getElementById('breath-subtext').textContent = 'Choose duration & press Start';
-      document.getElementById('breath-circle').className = 'lotus-circle w-48 h-48 rounded-full border-2 border-amber-500/60 flex flex-col items-center justify-center relative';
+      document.getElementById('breath-circle').className = 'lotus-circle w-36 h-36 sm:w-48 sm:h-48 rounded-full border-2 border-amber-500/60 flex flex-col items-center justify-center relative';
     }
 
     /* --------------------------------------------------
-       4. TRATAKA GAZING CHAMBER
+       4. TRATAKA GAZING CHAMBER (WITH IOS FULLSCREEN FALLBACK)
        -------------------------------------------------- */
     let tratakaInitialSeconds = 180;
     let tratakaSeconds = 180;
@@ -1012,9 +1141,9 @@
         document.getElementById(`target-${t}`).classList.toggle('flex', t === target);
         const tab = document.getElementById(`tab-${t}`);
         if (t === target) {
-          tab.className = 'btn-active px-3.5 py-2 rounded-xl text-xs uppercase tracking-wider transition';
+          tab.className = 'btn-active shrink-0 min-h-[40px] px-3.5 py-2 rounded-xl text-xs uppercase tracking-wider transition';
         } else {
-          tab.className = 'px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 text-xs uppercase tracking-wider transition';
+          tab.className = 'shrink-0 min-h-[40px] px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 text-xs uppercase tracking-wider transition';
         }
       });
     }
@@ -1077,15 +1206,25 @@
 
     function toggleFullScreenTrataka() {
       const chamber = document.getElementById('trataka-chamber');
-      if (!document.fullscreenElement) {
-        chamber.requestFullscreen().catch(() => {});
+      const fsBtn = document.getElementById('trataka-fs-btn');
+
+      if (chamber.requestFullscreen) {
+        if (!document.fullscreenElement) {
+          chamber.requestFullscreen().catch(() => {
+            chamber.classList.toggle('ios-fullscreen');
+          });
+        } else {
+          document.exitFullscreen();
+        }
       } else {
-        document.exitFullscreen();
+        // Fallback for iOS Safari
+        chamber.classList.toggle('ios-fullscreen');
+        fsBtn.textContent = chamber.classList.contains('ios-fullscreen') ? '✕ Exit' : '⛶ Fullscreen';
       }
     }
 
     /* --------------------------------------------------
-       5. 108 JAPA MALA & HANDS-FREE AUTO-PACER
+       5. 108 JAPA MALA & HAPTIC AUTO-PACER
        -------------------------------------------------- */
     let currentBead = 0;
     let japaTarget = 108;
@@ -1228,16 +1367,16 @@
       const grid = document.getElementById('chakra-grid');
       grid.innerHTML = CHAKRAS.map((c, idx) => `
         <div onclick="activateChakra(${idx})" id="chakra-card-${idx}"
-          class="glass-card rounded-2xl p-4 text-center cursor-pointer hover:scale-105 transition flex flex-col items-center justify-between border-t-4"
+          class="glass-card rounded-2xl p-3.5 sm:p-4 text-center cursor-pointer active:scale-95 hover:scale-[1.03] transition flex flex-col items-center justify-between border-t-4 ${idx === 6 ? 'col-span-2 sm:col-span-1' : ''}"
           style="border-top-color: ${c.color}">
-          <span class="text-[10px] uppercase tracking-widest themed-muted">${c.english} • ${c.freq} Hz</span>
-          <div class="w-12 h-12 rounded-full flex items-center justify-center my-3 font-bold text-white shadow-lg"
-            style="background-color: ${c.color}; box-shadow: 0 0 20px ${c.color}66">
+          <span class="text-[10px] uppercase tracking-widest themed-muted">${c.english} • ${c.freq}Hz</span>
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center my-2.5 font-bold text-white shadow-lg"
+            style="background-color: ${c.color}; box-shadow: 0 0 18px ${c.color}66">
             ${c.beej.split(' ')[0]}
           </div>
-          <h4 class="font-bold text-sm">${c.name}</h4>
-          <p class="text-xs font-mono text-amber-500 mt-1">${c.beej}</p>
-          <span class="mt-3 text-[10px] px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-500 font-semibold">▶ Tune & Load</span>
+          <h4 class="font-bold text-xs sm:text-sm">${c.name}</h4>
+          <p class="text-[11px] font-mono text-amber-500 mt-0.5">${c.beej}</p>
+          <span class="mt-2.5 text-[10px] px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-500 font-semibold">▶ Tune Chakra</span>
         </div>
       `).join('');
     }
@@ -1253,10 +1392,9 @@
     }
 
     /* --------------------------------------------------
-       7. 32 BEEJ MANTRAS DATABASE & FILTERING
+       7. 32 BEEJ MANTRAS DATABASE
        -------------------------------------------------- */
     const BEEJ_MANTRAS = [
-      // SUPREME & TRIMURTI / MAJOR DEVAS (9)
       { deity: "Para Brahman (Pranava)", category: "Supreme & Trimurti", beej: "ॐ (Aum / Om)", transliteration: "Om", fullMantra: "Om Pranava Parabrahmane Namaha", meaning: "Primordial cosmic vibration encompassing creation, preservation, and liberation." },
       { deity: "Lord Ganesha", category: "Supreme & Trimurti", beej: "गं (Gam) / ग्लौं (Glaum)", transliteration: "Gam / Glaum", fullMantra: "Om Gam Ganapataye Namaha", meaning: "Removes obstacles (Vighna), awakens siddhi, intellect, and auspicious beginnings." },
       { deity: "Lord Shiva (Mahadeva)", category: "Supreme & Trimurti", beej: "ह्रौं (Hraum)", transliteration: "Hraum", fullMantra: "Om Hraum Namah Shivaya", meaning: "Conquers fear and mortality, bestowing deep stillness, healing, and moksha." },
@@ -1266,17 +1404,13 @@
       { deity: "Lord Rama", category: "Supreme & Trimurti", beej: "रां (Raam)", transliteration: "Raam", fullMantra: "Om Raam Ramaya Namaha", meaning: "Ignites solar plexus Agni, righteousness, courage, and karmic purification." },
       { deity: "Lord Hanuman", category: "Supreme & Trimurti", beej: "हं (Ham) / ह्रौं (Hraum)", transliteration: "Ham / Hraum", fullMantra: "Om Ham Hanumate Rudratmakaya Hum Phat", meaning: "Bestows fearlessness, pranic strength, and protection from negative forces." },
       { deity: "Lord Kartikeya & Bhairava", category: "Supreme & Trimurti", beej: "सं (Sam) / भ्रं (Bhram)", transliteration: "Sam / Bhram", fullMantra: "Om Bhram Kalabhairavaya Phat", meaning: "Mastery over time, sharp spiritual willpower, and fierce protection." },
-
-      // TRIDEVI & SHAKTI (4)
       { deity: "Goddess Mahalakshmi", category: "Devi & Shakti", beej: "श्रीं (Shreem)", transliteration: "Shreem", fullMantra: "Om Shreem Hreem Shreem Mahalakshmyai Namaha", meaning: "Attracts spiritual and material abundance, beauty, grace, and auspiciousness." },
       { deity: "Goddess Saraswati", category: "Devi & Shakti", beej: "ऐं (Aim)", transliteration: "Aim", fullMantra: "Om Aim Saraswatyai Namaha", meaning: "Awakens Vak Shakti (eloquence), wisdom, music, arts, and scholarly brilliance." },
       { deity: "Goddess Durga (Adi Shakti)", category: "Devi & Shakti", beej: "दुं (Dum)", transliteration: "Dum", fullMantra: "Om Hreem Dum Durgayai Namaha", meaning: "Sovereign protective energy dissolving inner adversity and illusion." },
       { deity: "Goddess Annapurna & Gayatri", category: "Devi & Shakti", beej: "ह्रीं (Hreem)", transliteration: "Hreem", fullMantra: "Om Bhur Bhuvah Swah Tat Savitur Varenyam", meaning: "Nourishes body and soul while illuminating the supreme solar intellect." },
-
-      // ALL 10 DAS MAHAVIDYAS (10)
       { deity: "1. Maa Kali", category: "Das Mahavidya", beej: "क्रीं (Kreem)", transliteration: "Kreem", fullMantra: "Om Kreem Kalikayai Namaha", meaning: "Dissolves ego and time, awakening fierce Kundalini liberation." },
       { deity: "2. Maa Tara", category: "Das Mahavidya", beej: "त्रीं (Treem) / ह्रूं (Hroom)", transliteration: "Treem", fullMantra: "Om Hreem Treem Hum Phat", meaning: "Compassionate savior who guides consciousness across samsara." },
-      { deity: "3. Maa Tripura Sundari (Shodashi)", category: "Das Mahavidya", beej: "श्रीं ह्रीं क्लीं ऐं सौः", transliteration: "Shreem Hreem Kleem Aim Sauh", fullMantra: "Om Aim Hreem Shreem Lalitaambikayai Namaha", meaning: "Supreme Sri Vidya illumination, bliss, and non-dual grace." },
+      { deity: "3. Maa Tripura Sundari", category: "Das Mahavidya", beej: "श्रीं ह्रीं क्लीं ऐं सौः", transliteration: "Shreem Hreem Kleem Aim Sauh", fullMantra: "Om Aim Hreem Shreem Lalitaambikayai Namaha", meaning: "Supreme Sri Vidya illumination, bliss, and non-dual grace." },
       { deity: "4. Maa Bhuvaneshwari", category: "Das Mahavidya", beej: "ह्रीं (Hreem)", transliteration: "Hreem", fullMantra: "Om Hreem Bhuvaneshwaryai Namaha", meaning: "Queen of cosmic space (Akasha), expanding heart consciousness." },
       { deity: "5. Maa Bhairavi", category: "Das Mahavidya", beej: "हसैं हसकरी हसैं", transliteration: "Hasaim Hasakari Hasaim", fullMantra: "Om Hreem Bhairavyai Namaha", meaning: "Ignites Tapasya (spiritual fire) and radiates Kundalini Tejas." },
       { deity: "6. Maa Chhinnamasta", category: "Das Mahavidya", beej: "हूं (Hum)", transliteration: "Hum", fullMantra: "Shreem Hreem Kleem Aim Vajra Vairochaniye Hum Hum Phat Swaha", meaning: "Severs the conceptual mind and opens Sushumna Nadi." },
@@ -1284,8 +1418,6 @@
       { deity: "8. Maa Bagalamukhi", category: "Das Mahavidya", beej: "ह्लीं (Hleem)", transliteration: "Hleem", fullMantra: "Om Hleem Bagalamukhi Hum Phat Swaha", meaning: "Stills mental storms, silences negativity, and grants Vak Siddhi." },
       { deity: "9. Maa Matangi", category: "Das Mahavidya", beej: "ऐं ह्रीं क्लीं (Aim Hreem Kleem)", transliteration: "Aim Hreem Kleem", fullMantra: "Om Hreem Kleem Hum Matangyai Phat Swaha", meaning: "Tantric Saraswati of sacred music, mantra power, and inner truth." },
       { deity: "10. Maa Kamalatmika", category: "Das Mahavidya", beej: "श्रीं (Shreem)", transliteration: "Shreem", fullMantra: "Om Aim Hreem Shreem Kleem Hasauh Jagatprasutyai Namaha", meaning: "Lotus-crowned fullness of spiritual and earthly sovereignty." },
-
-      // ALL 9 NAVAGRAHAS (9)
       { deity: "Surya Deva (Sun)", category: "Navagraha", beej: "ह्रां ह्रीं ह्रौं (Hram Hreem Hraum)", transliteration: "Hram Hreem Hraum Sah", fullMantra: "Om Hram Hreem Hraum Sah Suryaya Namaha", meaning: "Soul radiance (Atma), vitality, leadership, and solar health." },
       { deity: "Chandra Deva (Moon)", category: "Navagraha", beej: "श्रां श्रीं श्रौं (Shram Shreem Shraum)", transliteration: "Shram Shreem Shraum Sah", fullMantra: "Om Shram Shreem Shraum Sah Chandraya Namaha", meaning: "Emotional peace, intuitive clarity, and mental coolness (Soma)." },
       { deity: "Mangala Deva (Mars)", category: "Navagraha", beej: "क्रां क्रीं क्रौं (Kram Kreem Kraum)", transliteration: "Kram Kreem Kraum Sah", fullMantra: "Om Kram Kreem Kraum Sah Bhaumaya Namaha", meaning: "Willpower, disciplined courage, and overcoming inertia." },
@@ -1301,34 +1433,34 @@
 
     function renderMantras(list) {
       const grid = document.getElementById('mantra-grid');
-      grid.innerHTML = list.map((item, idx) => `
-        <div class="glass-card rounded-2xl p-6 flex flex-col justify-between hover:border-amber-500 transition group">
+      grid.innerHTML = list.map(item => `
+        <div class="glass-card rounded-2xl p-4 sm:p-6 flex flex-col justify-between hover:border-amber-500 transition group">
           <div>
-            <div class="flex justify-between items-start gap-2 mb-3">
+            <div class="flex justify-between items-start gap-2 mb-2.5">
               <span class="text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-500 font-semibold border border-amber-500/25">
                 ${item.category}
               </span>
-              <span class="text-xs themed-muted font-mono">${item.transliteration}</span>
+              <span class="text-xs themed-muted font-mono truncate max-w-[120px]">${item.transliteration}</span>
             </div>
-            <h3 class="text-lg font-bold group-hover:text-amber-500 transition">${item.deity}</h3>
-            <div class="my-4 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/25 text-center">
-              <div class="text-2xl font-bold text-amber-500">${item.beej}</div>
-              <div class="text-xs mt-1 italic opacity-90">"${item.fullMantra}"</div>
+            <h3 class="text-base sm:text-lg font-bold group-hover:text-amber-500 transition">${item.deity}</h3>
+            <div class="my-3.5 p-3 rounded-xl bg-amber-500/10 border border-amber-500/25 text-center">
+              <div class="text-xl sm:text-2xl font-bold text-amber-500">${item.beej}</div>
+              <div class="text-xs mt-1 italic opacity-90 break-words">"${item.fullMantra}"</div>
             </div>
             <p class="text-xs themed-muted leading-relaxed">${item.meaning}</p>
           </div>
 
-          <div class="mt-5 grid grid-cols-6 gap-2">
+          <div class="mt-4 grid grid-cols-6 gap-2">
             <button onclick="speakMantraText('${item.fullMantra.replace(/'/g, "\\'")}')"
-              class="col-span-2 py-2 rounded-xl border border-purple-500/40 text-purple-500 text-xs font-semibold hover:bg-purple-500 hover:text-white transition" title="Listen to Pronunciation">
+              class="col-span-2 min-h-[40px] py-2 rounded-xl border border-purple-500/40 text-purple-500 text-xs font-semibold hover:bg-purple-500 hover:text-white transition">
               🔊 Listen
             </button>
             <button onclick="copyMantra('${item.fullMantra.replace(/'/g, "\\'")}', this)"
-              class="col-span-1 py-2 rounded-xl border border-amber-500/30 text-xs font-semibold hover:bg-amber-500/15 transition" title="Copy Mantra">
+              class="col-span-1 min-h-[40px] py-2 rounded-xl border border-amber-500/30 text-xs font-semibold hover:bg-amber-500/15 transition">
               📋
             </button>
             <button onclick="loadMantraToJapa('${item.fullMantra.replace(/'/g, "\\'")}')"
-              class="col-span-3 py-2 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-500 text-xs font-bold uppercase tracking-wider hover:bg-amber-500 hover:text-white transition">
+              class="col-span-3 min-h-[40px] py-2 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-500 text-xs font-bold uppercase tracking-wider hover:bg-amber-500 hover:text-white transition">
               📿 Load Japa
             </button>
           </div>
